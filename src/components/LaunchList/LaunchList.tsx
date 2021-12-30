@@ -1,7 +1,24 @@
 import React from "react";
+import { LaunchListQuery } from "../../generated/graphql";
 
-const LaunchRocket = () => {
-  return <h2>Hello</h2>;
+interface Props {
+  data: LaunchListQuery;
+}
+
+const className = "LaunchList";
+
+const LaunchList: React.FC<Props> = ({ data }) => {
+  return (
+    <div>
+      {data.launches?.map((launch, ind) => {
+        return (
+          <div>
+            <li key={ind}>{launch?.mission_name}</li>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
-export default LaunchRocket;
+export default LaunchList;
