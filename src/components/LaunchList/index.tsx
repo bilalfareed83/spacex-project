@@ -2,7 +2,11 @@ import React from "react";
 import { useLaunchListQuery } from "../../generated/graphql";
 import LaunchList from "./LaunchList";
 
-const LaunchListContainer = () => {
+interface Props {
+  handleIdChange: (newId: number) => void;
+}
+
+const LaunchListContainer: React.FC<Props> = ({ handleIdChange }) => {
   const { data, error, loading } = useLaunchListQuery();
 
   if (loading) return <h2>loading</h2>;
@@ -10,7 +14,7 @@ const LaunchListContainer = () => {
 
   console.log(data);
 
-  return <LaunchList data={data} />;
+  return <LaunchList data={data} handleIdChange={handleIdChange} />;
 };
 
 export default LaunchListContainer;
